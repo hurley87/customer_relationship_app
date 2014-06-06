@@ -4,10 +4,17 @@ require_relative "rolodex"
 
 class CRM 
 	attr_reader :name
+
+	def self.run(name)
+		crm = self.new(name)
+		crm.main_menu
+	end
+
 	def initialize(name)
 		@rolodex = Rolodex.new
 		@name = name
 	end
+
 	def main_menu
 		print_main_menu
   	user_selected = gets.to_i
@@ -39,14 +46,17 @@ class CRM
 	  email = gets.chomp
 	  print "Enter a Note: "
 	  note = gets.chomp
-	  contact = Contact.new(first_name, last_name, email, note)
-	  @rolodex.add_contact(contact)
+	  @rolodex.add_contact(Contact.new(first_name, last_name, email, note))
 	  main_menu
   end
+  def find_user
+  	puts "Enter user's unique ID: "
+  	id = gets.chomp
+  	id
+  end
   def modify_existing_contact
-  	puts "Please enter users last name:"
-  	name = gets.chomp
-  	@rolodex.edit_contact(name)
+  	id = find_user
+  	@rolodex.edit_contact(id)
   	main_menu
   end
   def display_contacts
@@ -54,9 +64,8 @@ class CRM
   	main_menu
   end
   def delete_contact
-  	puts "Enter last name: "
-  	name = gets.chomp
-  	@rolodex.delete(name)
+  	id = find_user
+  	@rolodex.delete(id)
   	main_menu
   end
   def display_attribute
@@ -71,6 +80,4 @@ class CRM
   end
 end
 
-start = CRM.new("dave's CRM")
-start.main_menu
-start.main_menu
+CRM.run("dave's CRM")

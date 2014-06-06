@@ -10,16 +10,19 @@ class Rolodex
 		@contact_id += 1
 	end
 	def display_contacts
-		puts "All contacts: "
+
 		if @contacts.empty?
 			puts "There are no contacts to display"
 		else
+			puts "All contacts: "
 			@contacts.each do |contact|
-				puts contact.first_name
-				puts contact.last_name
-				puts contact.email
-				puts contact.note
+				puts "ID: " + contact.id.to_s
+				puts "First Name: " + contact.first_name
+				puts "Last Name: " + contact.last_name
+				puts "Email: " + contact.email
+				puts "Note: " + contact.note
 			end
+			"------------------------------"
 		end
 	end
 	def edit_contact(id)

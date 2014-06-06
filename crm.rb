@@ -3,8 +3,10 @@ require_relative "rolodex"
 
 
 class CRM 
-	def initialize
+	attr_reader :name
+	def initialize(name)
 		@rolodex = Rolodex.new
+		@name = name
 	end
 	def main_menu
 		print_main_menu
@@ -52,12 +54,23 @@ class CRM
   	main_menu
   end
   def delete_contact
-  	puts "Enter name of user youd like to delete: "
+  	puts "Enter last name: "
   	name = gets.chomp
   	@rolodex.delete(name)
+  	main_menu
+  end
+  def display_attribute
+  	puts "Which attribute would you like to see?"
+  	puts "[1] First Name "
+  	puts "[2] Last Name"
+  	puts "[3] Email"
+  	puts "[4] Notes"
+  	user_input = gets.chomp.to_i
+  	@rolodex.display_attribute(user_input)
+  	main_menu
   end
 end
 
-start = CRM.new
+start = CRM.new("dave's CRM")
 start.main_menu
 start.main_menu
